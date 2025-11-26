@@ -22,7 +22,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().permitAll() // <-- deja todo abierto por ahora
+                .anyRequest().permitAll()
             )
             .formLogin(form -> form.disable())
             .httpBasic(basic -> basic.disable());
@@ -33,16 +33,17 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Permite explícitamente el origen del dev server de Vite
+
         configuration.setAllowedOrigins(List.of(
+            "https://maikhvz.github.io",     // 👈 GITHUB PAGES (IMPORTANTE)
             "http://localhost:5173",
             "http://localhost:5174",
             "http://localhost:5175"
         ));
+
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        // Si se necesitan cookies/sesiones, mantener true y evitar "*" en allowedOrigins
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false); // úsalo false si no manejas cookies/sesiones
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
