@@ -38,7 +38,8 @@ public class SecurityConfig {
             "https://maikhvz.github.io",     // 👈 GITHUB PAGES (IMPORTANTE)
             "http://localhost:5173",
             "http://localhost:5174",
-            "http://localhost:5175"
+            "http://localhost:5175",
+            "https://levelup-auth-production.up.railway.app"
         ));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
